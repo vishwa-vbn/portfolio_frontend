@@ -1,0 +1,229 @@
+.contact-container {
+  display: flex;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+  background-color: white;
+}
+
+.contact-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.c-logo {
+  width: 270px;
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title5 {
+  font-size: 35px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.wan_work {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 60px;
+  padding: 20px;
+}
+
+.contact-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+textarea,
+input[type="email"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.contact-btn1 {
+  color: black;
+  background-color: white;
+  padding: 12px 20px;
+  border: 2px solid rgba(255, 92, 109);
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn1:hover {
+  background-color: lightgray;
+}
+
+@media only screen and (max-width: 1000px) {
+  .contact-box {
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+  }
+
+  .wan_work{
+    font-size: 30px;
+  }
+  .c-logo {
+    width: 70%;
+    max-width: 270px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .title5 {
+    font-size: 30px;
+  }
+
+  .contact-form {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .contact-box {
+    width: 90%;
+  }
+
+  .c-logo {
+    width: 60%;
+    max-width: 200px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .wan_work {
+    font-size: 30px;
+    padding: 10px;
+  }
+
+  .title5 {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+
+  .contact-form {
+    width: 90%;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  textarea,
+  input[type="email"],
+  input[type="text"] {
+    font-size: 14px;
+  }
+
+  button[type="submit"] {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .contact-box {
+    width: 95%;
+  }
+
+  .c-logo {
+    width: auto;
+    max-width: 180px;
+    padding: 20px;
+    margin-top: 0px;
+  }
+
+  .wan_work {
+    font-size: 25px;
+    padding: 10px;
+  }
+
+  .title5 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .contact-form {
+    width: 95%;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  textarea,
+  input[type="email"],
+  input[type="text"] {
+    font-size: 12px;
+  }
+
+  button[type="submit"] {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+
+.success-message {
+  background-color: #dd6c43; 
+  color: white; 
+  text-align: center; 
+  padding: 20px; 
+  position: fixed;
+  top: 0;
+  border-radius: 5px;
+  margin-top: 70px;
+  left: 45%; 
+  transform: translateX(-50%); 
+  width: fit-content;
+  z-index: 999; 
+  animation: slideDown 0.5s ease-in-out forwards; 
+}
+
+
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0); 
+  }
+}
+

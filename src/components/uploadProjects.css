@@ -1,0 +1,75 @@
+
+.upload-form {
+      width: 100%;
+      max-width: 80%;
+      margin: 0 auto;
+      margin-top: 100px;
+      padding: 25px;
+      background-color: white;
+      border :1px solid lightgray;
+      border-radius: 8px;
+      box-shadow: 0px 10px  16px 0.6px rgba(180, 178, 178, 0.1);
+    }
+    
+    .upload-form label {
+      display: block;
+      font-weight: bold;
+      padding: 5px;
+
+    }
+    
+    .upload-form input[type="text"],
+    .upload-form input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-family: Arial, sans-serif;
+    }
+    
+    .upload-form button[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color:  #67bdeb;;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .upload-form button[type="submit"]:hover {
+      background-color:  #36aded;
+    }
+    
+    .success-message {
+      background-color: #e08c6d; 
+      color: white; 
+      text-align: center; 
+      padding: 20px; 
+      position: fixed; 
+      top: 0;
+      border-radius: 5px;
+      margin-top: 70px;
+      left: 45%; 
+      transform: translateX(-50%); 
+      z-index: 999; 
+      animation: slideDown 0.5s ease-in-out forwards; 
+    }
+    
+    
+    
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-100%); 
+      }
+      100% {
+        transform: translateY(0); 
+      }
+    }
+    

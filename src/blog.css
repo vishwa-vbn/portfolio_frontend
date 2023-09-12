@@ -1,0 +1,194 @@
+.testimonials-container {
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  width: 80%;
+  height: fit-content;
+  padding: 20px;
+  border-radius: 10px;
+  animation: slide-in 0.5s ease-in-out;
+}
+
+.logo-box {
+  text-align: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin: auto;
+}
+
+.rv-logo {
+  width: 270px;
+  background-blend-mode: color-burn;
+}
+
+.Review-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 500px;
+  overflow: auto;
+}
+
+.no-reviews{
+font-size: 25px;
+text-align: center;
+  width:100%;
+  margin-top: 100px;
+
+
+}
+
+.add-review-button{
+  background-color: white;
+  padding:12px 20px;
+  border-radius: 5px;
+  border:1px solid black;
+}
+
+.add-review-button:hover{
+  background-color: lightgray;
+}
+.Review-container::-webkit-scrollbar {
+  display: none;
+}
+
+.review-box {
+  background-color: rgba(240, 239, 239, 0.737);
+  width: 250px;
+  padding: 25px 30px;
+  height: fit-content;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 15px;
+}
+
+.author {
+  color: #888888;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.left-qote {
+  margin: 10px 20px 20px 0px;
+  font-size: 20px;
+  color: rgba(100, 148, 237, 0.578);
+}
+
+.Right-qote {
+  margin: 5px 10px;
+  margin-left: 180px;
+  font-size: 20px;
+  text-align: right;
+  color: rgba(100, 148, 237, 0.578);
+}
+
+.title7 {
+  color: rgb(11, 11, 11);
+  font-size: 40px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+@media only screen and (max-width: 900px) {
+  .testimonials-container {
+    position: relative;
+    margin: auto;
+    margin-top: 80px;
+    width: 80%;
+    height: fit-content;
+    border-radius: 10px;
+    animation: slide-in 0.5s ease-in-out;
+  }
+
+  .review-box {
+    width: 210px;
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-top: 15px;
+  }
+
+  .Review-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100vh;
+    margin: auto;
+  }
+
+  .logo-box {
+    width: 80%;
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: auto;
+  }
+
+  .rv-logo {
+    padding-top: 0px;
+    width: 80%;
+    margin: auto;
+    background-blend-mode: color-burn;
+  }
+
+  .title7 {
+    color: rgb(11, 11, 11);
+    font-size: 30px;
+    margin-top: 0px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 290px) {
+  .testimonials-container {
+    width: 100%;
+    margin-top: 60px;
+  }
+
+  .review-box {
+    width: 100%;
+    padding: 10px;
+    font-size: 10px;
+    margin-top: 10px;
+  }
+
+  .rv-logo {
+    width: 60%;
+    margin: auto;
+  }
+}
+
+
+.loading-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #333;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.loader-container
+{
+  margin: auto;
+  margin-top: 50px;
+  justify-self: center;
+}

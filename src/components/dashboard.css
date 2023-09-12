@@ -1,0 +1,156 @@
+.dashboard-container {
+  margin: auto;
+  margin-top: 120px; 
+  text-align: center;
+  width: 80%;
+  font-weight: 100;
+  max-width: 1200px; 
+}
+
+.dashboard-button {
+  padding: 2%; 
+  font-size: 2em; 
+  margin: 2%; 
+  width: 30%; 
+  background-color: white;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+}
+
+.button-container {
+  margin: auto;
+}
+
+.user_profile img {
+  margin-top: 20px;
+  border-radius: 100%;
+  width: 10%; 
+  border: 1px solid lightgray;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 5%; 
+  box-shadow: 0 0 20px rgba(201, 201, 201, 0.1);
+}
+
+thead {
+  background-color: #efefef;
+  color: black;
+}
+
+th, td {
+  padding: 2% 3%; 
+  font-size: 1em; 
+  text-align: center;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+td button {
+  padding: 1% 2%; 
+  background-color: white;
+  border-radius: 5px;
+  margin: 2%; 
+  cursor: pointer;
+  font-size: 1em; 
+  transition: background-color 0.3s;
+}
+
+td button:hover {
+  background-color: #e5e2e2;
+}
+
+h1 {
+  font-size: 1.5em; 
+  margin-bottom: 2%; 
+  margin-top: 2%; 
+}
+
+.table-logo {
+  width: 70px; 
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.delete-confirmation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  text-align: center;
+}
+
+.delete-confirmation-modal p {
+  font-size: 1em; 
+  margin-bottom: 2%;
+}
+
+.delete-confirmation-modal button {
+  background-color: lightgray;
+  color: black;
+  border: none;
+  padding: 1% 2%; 
+  margin: 2%; 
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em; 
+  transition: background-color 0.3s;
+}
+
+.delete-confirmation-modal button:hover {
+  background-color: #e5e2e2;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+@media (max-width: 768px) {
+  .dashboard-button {
+    width: 50%; 
+  }
+
+  .user_profile img {
+    width: 20%; 
+  }
+
+  th, td {
+    font-size: 0.8em; 
+  }
+
+  h1 {
+    font-size: 1.2em; 
+  }
+
+  .table-logo {
+    width: 70px; 
+  }
+
+}

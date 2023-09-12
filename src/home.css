@@ -1,0 +1,133 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  margin-top: 150px;
+  padding: 20px 0px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-content {
+  width: 60%;
+  margin: auto;
+}
+
+.intro-title {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: rgb(12, 12, 12);
+}
+
+.description {
+  margin-top: 20px;
+}
+
+.description p {
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.image-container1 {
+  margin: auto;
+}
+
+.coding-image {
+  flex: 2;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.5s ease-in-out forwards;
+  animation-delay: 0.3s;
+}
+
+.contact-btn {
+  width: 120px;
+
+  color: black;
+  border: 1px solid black;
+  padding: 12px 20px;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.cont-scroll{
+  font-size: 18px;
+}
+.contact-btn:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+  * {
+    font-size: 13px;
+  }
+  .intro-title {
+    font-size: 30px;
+  }
+  .intro-content {
+    width: 100%;
+    margin: auto;
+  }
+
+  .home-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .intro-content {
+    margin: auto;
+  }
+
+  .coding-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .home-container {
+    margin-top: 100px;
+  }
+
+  .intro-content {
+    width: 90%;
+    margin: auto;
+  }
+  .intro-title {
+    font-size: 26px;
+  }
+  .image-container1 {
+    padding: 0px;
+    margin: auto;
+  }
+  .coding-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    padding: 0px;
+    border-radius: 8px;
+  }
+}
