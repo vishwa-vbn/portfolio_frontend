@@ -96,5 +96,16 @@
 
 
 
+@media only screen and (max-width: 768px)
+{
+  .projects-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: auto;
+    margin-top: 100px;
+}
 
+}
 

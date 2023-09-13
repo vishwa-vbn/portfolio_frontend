@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,9 +6,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './dashboard.css';
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
+
+ 
   const [projects, setProjects] = useState([]);
-  const [adminEmail, setAdminEmail] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const [isSkillDeleteConfirmationOpen, setIsSkillDeleteConfirmationOpen] = useState(false);
@@ -23,17 +23,21 @@ const Dashboard = () => {
   const [loadingSkills, setLoadingSkills] = useState(true);
   const navigate = useNavigate();
 
-  const getUser = async () => {
-    try {
-     const url = `${process.env.REACT_APP_API_URL}/auth/login/success`;
-      ;
-      const { data } = await axios.get(url, { withCredentials: true });
-      setUser(data.user._json);
-    } catch (err) {
-      console.error(err);
-      navigate('/login');
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      navigate('/login'); // Redirect to login if no token is found
+    } else {
+      setUserEmail(localStorage.getItem('userEmail'));
+
     }
-  };
+  
+  }, [navigate]);
+
+
 
   const fetchProjects = async () => {
     try {
@@ -60,42 +64,31 @@ const Dashboard = () => {
     }
   };
 
-  const getAdminEmail = async () => {
-    try {
-      const adminEmailResponse = await axios.get(`${process.env.REACT_APP_API_URL}/getAdmin`);
-      setAdminEmail(adminEmailResponse.data.email);
-    } catch (err) {
-      console.error('Error fetching admin email:', err);
-    }
-  };
+
 
   useEffect(() => {
-    getUser();
-    getAdminEmail();
     fetchProjects();
     fetchReviews();
   }, []);
 
-  const isAdmin = () => {
-    return user && user.email === adminEmail;
-  };
+
 
   useEffect(() => {
-    const delay = 5000;
+    const delay = 3000;
     const timer = setTimeout(() => {
-      if (!isAdmin()) {
+      if (!userEmail) {
         navigate('/login');
       }
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [adminEmail]);
+  }, [userEmail]);
 
   useEffect(() => {
-    if (user) {
+    if (userEmail) {
       setIsLoading(false);
     }
-  }, [user]);
+  }, [userEmail]);
 
   const openDeleteConfirmation = (projectId) => {
     setIsDeleteConfirmationOpen(true);
@@ -116,7 +109,7 @@ const Dashboard = () => {
     setIsSkillDeleteConfirmationOpen(false);
     setDeleteSkillId(null);
   };
-  
+
   const openReviewDeleteConfirmation = (reviewId) => {
     setIsReviewDeleteConfirmationOpen(true);
     setDeleteReviewId(reviewId);
@@ -206,16 +199,20 @@ const Dashboard = () => {
     }
   };
   
+
+  window.onbeforeunload = function() {
+    localStorage.clear();
+  }
+  
   return (
+   
     <div className="dashboard-container">
       {isLoading ? (
         <p>Loading...</p>
-      ) : isAdmin() ? (
+      ) :userEmail? (
         <>
-          <div className="user_profile">
-            <img src={user.picture} alt="user-image" />
-          </div>
-          <h1>Welcome, {user.name}!</h1>
+          <h1>Welcome Back!</h1>
+          <p>{userEmail}</p>
           <div className="button-container">
             <Link to="/upSkill">
               <button className="dashboard-button">
@@ -228,123 +225,125 @@ const Dashboard = () => {
               </button>
             </Link>
           </div>
+          <h2>Uploaded Projects</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Logo</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {projects.map((project) => (
+      <tr key={project._id}>
+        <td>
+          <img className="table-logo" src={project.imageUrl} alt="logo-img" />
+        </td>
+        <td>{project.category}</td>
+        <td>{project.description.slice(0, 50)}...</td>
+        <td>
+          <button onClick={() => openDeleteConfirmation(project._id)}>Delete</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<h2>Uploaded Skills</h2>
+
+{loadingSkills ? (
+  <p>Loading skills...</p>
+) : error ? (
+  <p>Error: {error.message}</p>
+) : (
+  <table>
+    <thead>
+      <tr>
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {skills.map((skill) => (
+      <tr key={skill._id}>
+        <td>
+          <img className="table-logo" src={skill.imageUrl} alt="Skill Icon" />
+        </td>
+        <td>{skill.name}</td>
+        <td>
+          <button onClick={() => openSkillDeleteConfirmation(skill._id)}>Delete</button>
+        </td>
+      </tr>
+    ))}
+    </tbody>
+  </table>
+)}
+
+<h2>Uploaded Reviews</h2>
+
+{loadingReviews ? (
+  <p>Loading reviews...</p>
+) : (
+  <table>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Review</th>
+        <th>Stars</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {reviews.map((review) => (
+        <tr key={review._id}>
+          <td>{review.name}</td>
+          <td>{review.text.slice(0, 50)}...</td>
+          <td>{review.rating}</td>
+          <td>
+            <button onClick={() => openReviewDeleteConfirmation(review._id)}>Delete</button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)}
+
+{isDeleteConfirmationOpen && (
+  <div className="delete-confirmation-modal">
+    <p>Are you sure you want to delete this project?</p>
+    <button onClick={deleteProject}>Yes</button>
+    <button onClick={closeDeleteConfirmation}>No</button>
+  </div>
+)}
+
+{isSkillDeleteConfirmationOpen && (
+  <div className="delete-confirmation-modal">
+    <p>Are you sure you want to delete this skill?</p>
+    <button onClick={deleteSkill}>Yes</button>
+    <button onClick={closeSkillDeleteConfirmation}>No</button>
+  </div>
+)}
+
+{isReviewDeleteConfirmationOpen && (
+  <div className="delete-confirmation-modal">
+    <p>Are you sure you want to delete this Review?</p>
+    <button onClick={deleteReview}>Yes</button>
+    <button onClick={closeReviewDeleteConfirmation}>No</button>
+  </div>
+)}
+
+
         </>
       ) : (
         <p>Invalid admin credentials. Please log in with admin credentials.</p>
       )}
 
-      <h2>Uploaded Projects</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Logo</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((project) => (
-            <tr key={project._id}>
-              <td>
-                <img className="table-logo" src={project.imageUrl} alt="logo-img" />
-              </td>
-              <td>{project.category}</td>
-              <td>{project.description.slice(0, 50)}...</td>
-              <td>
-                <button onClick={() => openDeleteConfirmation(project._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h2>Uploaded Skills</h2>
-
-      {loadingSkills ? (
-        <p>Loading skills...</p>
-      ) : error ? (
-        <p>Error: {error.message}</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Icon</th>
-              <th>Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-          {skills.map((skill) => (
-            <tr key={skill._id}>
-              <td>
-                <img className="table-logo" src={skill.imageUrl} alt="Skill Icon" />
-              </td>
-              <td>{skill.name}</td>
-              <td>
-                <button onClick={() => openSkillDeleteConfirmation(skill._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-          </tbody>
-        </table>
-      )}
-
-      <h2>Uploaded Reviews</h2>
-
-      {loadingReviews ? (
-        <p>Loading reviews...</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Author</th>
-              <th>Review</th>
-              <th>Stars</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reviews.map((review) => (
-              <tr key={review._id}>
-                <td>{review.name}</td>
-                <td>{review.text.slice(0, 50)}...</td>
-                <td>{review.rating}</td>
-                <td>
-                  <button onClick={() => openReviewDeleteConfirmation(review._id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      {isDeleteConfirmationOpen && (
-        <div className="delete-confirmation-modal">
-          <p>Are you sure you want to delete this project?</p>
-          <button onClick={deleteProject}>Yes</button>
-          <button onClick={closeDeleteConfirmation}>No</button>
-        </div>
-      )}
-
-      {isSkillDeleteConfirmationOpen && (
-        <div className="delete-confirmation-modal">
-          <p>Are you sure you want to delete this skill?</p>
-          <button onClick={deleteSkill}>Yes</button>
-          <button onClick={closeSkillDeleteConfirmation}>No</button>
-        </div>
-      )}
-
-      {isReviewDeleteConfirmationOpen && (
-        <div className="delete-confirmation-modal">
-          <p>Are you sure you want to delete this Review?</p>
-          <button onClick={deleteReview}>Yes</button>
-          <button onClick={closeReviewDeleteConfirmation}>No</button>
-        </div>
-      )}
-    </div>
-  );
+</div>
+      );
 };
 
 export default Dashboard;

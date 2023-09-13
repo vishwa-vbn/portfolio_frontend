@@ -1,33 +1,71 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 
-function Login() {
-  const [showLogin, setShowLogin] = useState(true);
+const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const toggleForm = () => {
-    setShowLogin((prev) => !prev);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const googleAuth = () => {
-    window.location.href = `${process.env.REACT_APP_API_URL}/auth/google`;
+    try {
+      // Perform the login request to your API
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+
+        // Store the token in local storage
+        localStorage.setItem('token', userData.token);
+        localStorage.setItem('userEmail', email);
+
+        // Redirect to the dashboard screen
+        navigate('/dashboard'); // Replace 'dashboard' with your actual dashboard route
+      } else {
+        const data = await response.json();
+        alert('Login Failed', data.error || 'Login failed. Please check your credentials.');
+      }
+    } catch (error) {
+      console.error('An error occurred while logging in:', error);
+      alert('Error', 'An error occurred while logging in. Please try again later.');
+    }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form">
-        <h2 className="form-heading">{showLogin ? 'Sign in' : 'Sign Up'}</h2>
-        <button className="google-btn" onClick={googleAuth}>
-          <img src="google.png" alt="google icon" />
-          <span>Sign in with Google</span>
-        </button>
-        <p className="text">
-          Only for admin
-       
-        </p>
-      </div>
+    <div className="login-form">
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor='email-log'>Email:</label>
+          <input
+          id="email-log"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <label htmlFor='password'>Password:</label>
+          <input
+          id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        <button className='loginbtn' type="submit">Login</button>
+        </div>
+
+      </form>
     </div>
   );
-}
+};
 
 export default Login;

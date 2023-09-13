@@ -77,6 +77,14 @@
 }
 
 @media (max-width: 768px) {
+
+
+  .project-page {
+    padding: 0px;
+    width: 100%;
+    border-radius: 10px;
+  }
+
   .buttons-container {
     flex-direction: column; 
   }

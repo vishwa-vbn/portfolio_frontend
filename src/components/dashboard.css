@@ -11,7 +11,7 @@
   padding: 2%; 
   font-size: 2em; 
   margin: 2%; 
-  width: 30%; 
+  width: 40%; 
   background-color: white;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 5px;
@@ -41,7 +41,7 @@ thead {
 }
 
 th, td {
-  padding: 2% 3%; 
+  padding: 10px; 
   font-size: 1em; 
   text-align: center;
 }
@@ -63,7 +63,7 @@ tbody tr:hover {
 }
 
 td button {
-  padding: 1% 2%; 
+  padding: 10px; 
   background-color: white;
   border-radius: 5px;
   margin: 2%; 
